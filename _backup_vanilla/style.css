@@ -1,0 +1,322 @@
+:root {
+    --bg-color: #121214;
+    --surface-color: #202024;
+    --primary-color: #8257e6;
+    --primary-hover: #996dff;
+    --secondary-color: #2c2c31;
+    --text-color: #e1e1e6;
+    --text-dim: #a8a8b3;
+    --health-color: #e53e3e;
+    --mana-color: #3182ce;
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--surface-color);
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 2;
+}
+
+h1, h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Botões */
+button {
+    cursor: pointer;
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(130, 87, 230, 0.4);
+}
+
+.btn-secondary {
+    padding: 0.8rem 2rem;
+    background-color: transparent;
+    border: 2px solid var(--text-dim);
+    color: var(--text-dim);
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+
+/* Grids e Listas */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.char-card {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.char-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.char-card:hover, .char-card.selected {
+    border-color: var(--primary-color);
+    background-color: #29292e;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.dungeon-item {
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dungeon-item:hover {
+    background-color: #29292e;
+}
+
+/* Tela de Jogo */
+#screen-game {
+    justify-content: space-between;
+    padding: 0;
+}
+
+.game-header {
+    width: 100%;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stats-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bar-container {
+    width: 150px;
+    height: 16px;
+    background-color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #333;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: var(--health-color);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#player-hp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 2px #000;
+}
+
+.game-view {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.scene {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 600px;
+    height: 300px; /* Altura da area de combate */
+    padding-bottom: 2rem;
+}
+
+.character-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.character-display img {
+    height: 180px;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    transition: transform 0.2s;
+}
+
+.character-display.hidden {
+    opacity: 0;
+}
+
+/* Animações simples */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes attack-right {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+    100% { transform: translateX(0); }
+}
+
+.attack-anim {
+    animation: attack-right 0.3s;
+}
+
+.log-box {
+    width: 90%;
+    max-width: 600px;
+    height: 80px;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    border: 1px solid #333;
+}
+
+.game-controls {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-action {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.btn-action:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.hp-bar-small {
+    width: 100px;
+    height: 8px;
+    margin-top: 5px;
+}

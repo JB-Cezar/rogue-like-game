@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon crawler RPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Tela de Menu -->
+        <div id="screen-menu" class="screen active">
+            <h1>Mini Dungeon RPG</h1>
+            <p>Explore masmorras, derrote monstros e sobreviva.</p>
+            <button id="btn-start" class="btn-primary">Novo Jogo</button>
+        </div>
+
+        <!-- Tela de Seleção de Personagem -->
+        <div id="screen-char-select" class="screen hidden">
+            <h2>Escolha seu Herói</h2>
+            <div id="char-grid" class="grid-container">
+                <!-- Personagens serão injetados via JS -->
+            </div>
+            <button id="btn-back-menu" class="btn-secondary">Voltar</button>
+        </div>
+
+        <!-- Tela de Seleção de Dungeon -->
+        <div id="screen-dungeon-select" class="screen hidden">
+            <h2>Selecione a Masmorra</h2>
+            <div id="dungeon-list" class="list-container">
+                <!-- Dungeons serão injetadas via JS -->
+            </div>
+            <button id="btn-back-char" class="btn-secondary">Voltar</button>
+        </div>
+
+        <!-- Tela de Jogo (Exploração/Combate) -->
+        <div id="screen-game" class="screen hidden">
+            <header class="game-header">
+                <div class="stats-box">
+                    <span id="player-name">Heroi</span>
+                    <div class="bar-container hp-bar">
+                        <div id="player-hp-bar" class="bar-fill" style="width: 100%;"></div>
+                        <span id="player-hp-text">100/100</span>
+                    </div>
+                </div>
+                <div class="dungeon-info">
+                    <span id="dungeon-name">Masmorra</span>
+                    <span id="room-counter">Sala 1/10</span>
+                </div>
+            </header>
+
+            <main class="game-view">
+                <div class="scene">
+                    <div id="hero-display" class="character-display">
+                        <img id="hero-img" src="" alt="Heroi">
+                        <div class="effect-container"></div>
+                    </div>
+                    <div id="enemy-display" class="character-display hidden">
+                        <img id="enemy-img" src="" alt="Inimigo">
+                        <div class="enemy-stats">
+                            <span id="enemy-name">Monstro</span>
+                            <div class="bar-container hp-bar-small">
+                                <div id="enemy-hp-bar" class="bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="combat-log" class="log-box">
+                    <p>Bem-vindo à masmorra!</p>
+                </div>
+            </main>
+
+            <footer class="game-controls">
+                <div id="combat-actions" class="hidden">
+                    <button id="btn-attack" class="btn-action">Atacar</button>
+                    <button id="btn-defend" class="btn-action">Defender</button>
+                    <button id="btn-special" class="btn-action">Especial</button>
+                </div>
+                <div id="exploration-actions">
+                    <button id="btn-next-room" class="btn-action">Avançar</button>
+                </div>
+            </footer>
+        </div>
+        
+        <!-- Tela de Game Over / Vitoria -->
+        <div id="screen-result" class="screen hidden">
+            <h2 id="result-title">Fim de Jogo</h2>
+            <p id="result-message"></p>
+            <button id="btn-restart" class="btn-primary">Voltar ao Menu</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

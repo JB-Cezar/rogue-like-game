@@ -1,0 +1,76 @@
+/**
+ * style.css - Definições de Estilo Global
+ * Contém variáveis de cores, fontes e estilos base de botões.
+ */
+:root {
+  /* Paleta de Cores e Tokens de Design */
+  --bg-color: #121214;       /* Fundo principal da página */
+  --surface-color: #202024;  /* Cor de containers e janelas */
+  --primary-color: #8257e6;  /* Cor roxa principal */
+  --primary-hover: #996dff;  /* Roxa mais clara para efeitos de hover */
+  --secondary-color: #2c2c31; 
+  --text-color: #e1e1e6;     /* Texto principal (quase branco) */
+  --text-dim: #a8a8b3;       /* Texto secundário/desfocado */
+  --health-color: #e53e3e;   /* Cor para barras de vida */
+  --mana-color: #3182ce;     /* Cor para barras de mana */
+  --border-radius: 8px;      /* Arredondamento padrão */
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(130, 87, 230, 0.4);
+}
+
+.btn-secondary {
+  padding: 0.8rem 2rem;
+  background-color: transparent;
+  border: 2px solid var(--text-dim);
+  color: var(--text-dim);
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-color);
+  color: var(--text-color);
+}
